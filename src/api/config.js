@@ -3,12 +3,13 @@ import { getFirestore } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDyAZVQ1G9CBFXBCp0aNTwvt4ojle0JHX4",
-  authDomain: "tcl-52-smart-shopping-list.firebaseapp.com",
-  projectId: "tcl-52-smart-shopping-list",
-  storageBucket: "tcl-52-smart-shopping-list.appspot.com",
-  messagingSenderId: "380992563508",
-  appId: "1:380992563508:web:0a2c04044d26bd83b79d61"
+	apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+	authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+	projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+	storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+	appId: import.meta.env.VITE_FIREBASE_APP_ID,
+	measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
