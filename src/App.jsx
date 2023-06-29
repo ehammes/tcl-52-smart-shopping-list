@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect, useState, useCallback } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 import { AddItem, Home, Layout, List } from './views';
 import { About } from './views/About';
@@ -8,12 +8,16 @@ import { getItemData, streamListItems } from './api';
 import { useStateWithStorage } from './utils';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 
+import { useNavigate } from 'react-router-dom';
+
 export function App() {
 	const [data, setData] = useState([]);
 	const [listToken, setListToken] = useStateWithStorage(
 		null,
 		'tcl-shopping-list-token',
 	);
+
+	const redirect = useNavigate();
 
 	// Create/get a history of list tokens used so we can show the user all the lists they've ever viewed and jump between them.
 	const [tokenHistory, setTokenHistory] = useStateWithStorage(
@@ -57,38 +61,50 @@ export function App() {
 		});
 	}, [listToken]);
 
+	const handleCreateNewList = useCallback(() => {
+		handleNewToken();
+		redirect('/list');
+	}, [handleNewToken]);
+
 	return (
-		<Router>
-			<Routes>
-				<Route path="/" element={<Layout listToken={listToken} />}>
-					<Route
-						index
-						element={
-							<Home
-								handleNewToken={handleNewToken}
-								setListToken={setListToken}
-								listToken={listToken}
-								tokenHistory={tokenHistory}
-							/>
-						}
+		<Routes>
+			<Route
+				path="/"
+				element={
+					<Layout
+						listToken={listToken}
+						handleCreateNewList={handleCreateNewList}
 					/>
-					<Route
-						path="/list"
-						element={
-							<List
-								data={data}
-								listToken={listToken}
-								tokenHistory={tokenHistory}
-							/>
-						}
-					/>
-					<Route
-						path="/add-item"
-						element={<AddItem listToken={listToken} data={data} />}
-					/>
-					<Route path="/about" element={<About />} />
-				</Route>
-			</Routes>
-		</Router>
+				}
+			>
+				<Route
+					index
+					element={
+						<Home
+							handleNewToken={handleNewToken}
+							setListToken={setListToken}
+							listToken={listToken}
+							tokenHistory={tokenHistory}
+							handleCreateNewList={handleCreateNewList}
+						/>
+					}
+				/>
+				<Route
+					path="/list"
+					element={
+						<List
+							data={data}
+							listToken={listToken}
+							tokenHistory={tokenHistory}
+						/>
+					}
+				/>
+				<Route
+					path="/add-item"
+					element={<AddItem listToken={listToken} data={data} />}
+				/>
+				<Route path="/about" element={<About />} />
+			</Route>
+		</Routes>
 	);
 }
