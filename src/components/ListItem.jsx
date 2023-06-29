@@ -1,4 +1,4 @@
-import './ListItem.css';
+// import './ListItem.css';
 import { useState } from 'react';
 import { updateItem, deleteItem } from '../api';
 import { getDaysBetweenDates } from '../utils';
@@ -10,9 +10,13 @@ import {
 	ListItem,
 	ListItemText,
 	IconButton,
-	Typography,
+	Accordion,
+	AccordionSummary,
+	AccordionDetails,
 } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Tooltip from '@mui/material/Tooltip';
 
 export function ListItems({ name, data, listToken }) {
 	const initialChecked =
@@ -31,51 +35,118 @@ export function ListItems({ name, data, listToken }) {
 		}
 	};
 
-	function handleDeleteItem() {
-		if (window.confirm(`Are you sure you wish to delete ${name}?`)) {
-			deleteItem(listToken, data.id);
-		}
-	}
+	// function handleDeleteItem() {
+	// 	if (window.confirm(`Are you sure you wish to delete ${name}?`)) {
+	// 		deleteItem(listToken, data.id);
+	// 	}
+	// }
 
-	const primaryTypographyProps = {
-		style: {
-			fontFamily:
-				"'Manrope', sans-serif, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif",
-			fontWeight: '600',
-			fontSize: '1.6rem',
-			lineHeight: '1.4',
-		},
+	const handleDeleteItem = () => {
+		deleteItem(listToken, data.id);
+	};
+
+	// const primaryTypographyProps = {
+	// 	style: {
+	// 		fontFamily:
+	// 			"'Manrope', sans-serif, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif",
+	// 		fontWeight: '600',
+	// 		fontSize: '1.6rem',
+	// 		lineHeight: '1.4',
+	// 	},
+	// };
+
+	// Convert Last Purchase to Date Format
+	const purchaseDate = (date) => {
+		if (date !== null) {
+			let lastPurchased = new Date(date.seconds * 1000);
+			return lastPurchased.toLocaleDateString();
+		}
 	};
 
 	return (
 		<>
-			<List dense>
-				<ListItem
-					secondaryAction={
-						<IconButton
-							edge="end"
-							aria-label="delete"
-							onClick={handleDeleteItem}
-						>
-							<DeleteIcon />
-						</IconButton>
-					}
-				>
-					<Checkbox
-						className="ListItem-checkbox"
+			<div className="border-2">
+				<Accordion>
+					<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+						<div className="grid w-full grid-cols-2 gap-4 cursor-pointer hover:bg-gray-50">
+							<div className="flex gap-2 my-auto">
+								<input
+									id="listItem"
+									type="checkbox"
+									checked={isChecked}
+									onChange={handleSelect}
+									className="cursor-pointer accent-green-primary"
+								/>
+								<label className="text-lg font-semibold" htmlFor="listItem">
+									{name}
+								</label>
+							</div>
+							<div className="flex justify-end px-2">
+								<Tooltip title="DELETE">
+									<IconButton
+										edge="end"
+										aria-label="delete"
+										onClick={handleDeleteItem}
+									>
+										<DeleteIcon />
+									</IconButton>
+								</Tooltip>
+							</div>
+						</div>
+					</AccordionSummary>
+					<AccordionDetails className="border border-gray-100">
+						<ul>
+							<li className="mx-1 text-sm font-semibold text-black">
+								NEXT PURCHASE:{' '}
+								<span className="font-normal text-green-primary">
+									{data.urgency}
+								</span>
+							</li>
+							<li className="mx-1 text-sm font-semibold text-black">
+								LAST PURCHASED:{' '}
+								<span className="font-normal text-green-primary">
+									{data.dateLastPurchased === null
+										? 'Never'
+										: purchaseDate(data.dateLastPurchased)}
+								</span>
+							</li>
+							<li className="mx-1 text-sm font-semibold text-black">
+								TOTAL PURCHASED:{' '}
+								<span className="font-normal text-green-primary">
+									{data.totalPurchases}
+								</span>
+							</li>
+						</ul>
+
+						{/* </div> */}
+					</AccordionDetails>
+				</Accordion>
+			</div>
+			{/* 
+			<div className="grid grid-cols-4 cursor-pointer hover:bg-gray-50">
+				<div className="flex justify-center my-auto">
+					<input
 						id="listItem"
+						type="checkbox"
 						checked={isChecked}
 						onChange={handleSelect}
+						className="accent-green-primary"
 					/>
-					<ListItemText
-						primary={
-							<Typography {...primaryTypographyProps}>{name}</Typography>
-						}
-					/>
-
-					<label className="ListItem-urgency">{data.urgency}</label>
-				</ListItem>
-			</List>
+				</div>
+				<div className="flex justify-start my-auto">
+					<label className="text-lg font-semibold" htmlFor="listItem">
+						{name}
+					</label>
+				</div>
+				<div className="flex justify-end my-auto">
+					<label className="text-lg font-semibold">{data.urgency}</label>
+				</div>
+				<div className="flex justify-center m-auto">
+					<IconButton edge="end" aria-label="delete" onClick={handleDeleteItem}>
+						<DeleteIcon />
+					</IconButton>
+				</div>
+			</div> */}
 		</>
 	);
 }
