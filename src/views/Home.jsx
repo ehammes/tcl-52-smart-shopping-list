@@ -137,7 +137,7 @@ export function Home({
 								SHOPPING LISTS:
 							</p>
 							<ul className="">
-								{tokenHistory.reverse().map((token) => {
+								{tokenHistory.map((token) => {
 									return (
 										<li
 											key={token.token}
