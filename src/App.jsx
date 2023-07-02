@@ -25,7 +25,7 @@ export function App() {
 		'tcl-shopping-list-token-history',
 	);
 
-	const handleNewToken = () => {
+	const handleNewToken = useCallback(() => {
 		const newToken = generateToken();
 		setListToken(newToken);
 
@@ -35,7 +35,7 @@ export function App() {
 		};
 		// Add the new token to the token history
 		setTokenHistory([...tokenHistory, tokenObject]);
-	};
+	}, [setListToken, setTokenHistory, tokenHistory]);
 
 	useEffect(() => {
 		if (!listToken) return;
@@ -64,7 +64,7 @@ export function App() {
 	const handleCreateNewList = useCallback(() => {
 		handleNewToken();
 		redirect('/list');
-	}, [handleNewToken]);
+	}, [handleNewToken, redirect]);
 
 	return (
 		<Routes>
