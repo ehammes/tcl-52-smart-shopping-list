@@ -1,14 +1,9 @@
-// import './ListItem.css';
 import { useState } from 'react';
 import { updateItem, deleteItem } from '../api';
 import { getDaysBetweenDates } from '../utils';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
 import {
-	Checkbox,
-	List,
-	ListItem,
-	ListItemText,
 	IconButton,
 	Accordion,
 	AccordionSummary,
@@ -35,25 +30,9 @@ export function ListItems({ name, data, listToken }) {
 		}
 	};
 
-	// function handleDeleteItem() {
-	// 	if (window.confirm(`Are you sure you wish to delete ${name}?`)) {
-	// 		deleteItem(listToken, data.id);
-	// 	}
-	// }
-
 	const handleDeleteItem = () => {
 		deleteItem(listToken, data.id);
 	};
-
-	// const primaryTypographyProps = {
-	// 	style: {
-	// 		fontFamily:
-	// 			"'Manrope', sans-serif, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif",
-	// 		fontWeight: '600',
-	// 		fontSize: '1.6rem',
-	// 		lineHeight: '1.4',
-	// 	},
-	// };
 
 	// Convert Last Purchase to Date Format
 	const purchaseDate = (date) => {
@@ -122,31 +101,6 @@ export function ListItems({ name, data, listToken }) {
 					</AccordionDetails>
 				</Accordion>
 			</div>
-			{/* 
-			<div className="grid grid-cols-4 cursor-pointer hover:bg-gray-50">
-				<div className="flex justify-center my-auto">
-					<input
-						id="listItem"
-						type="checkbox"
-						checked={isChecked}
-						onChange={handleSelect}
-						className="accent-green-primary"
-					/>
-				</div>
-				<div className="flex justify-start my-auto">
-					<label className="text-lg font-semibold" htmlFor="listItem">
-						{name}
-					</label>
-				</div>
-				<div className="flex justify-end my-auto">
-					<label className="text-lg font-semibold">{data.urgency}</label>
-				</div>
-				<div className="flex justify-center m-auto">
-					<IconButton edge="end" aria-label="delete" onClick={handleDeleteItem}>
-						<DeleteIcon />
-					</IconButton>
-				</div>
-			</div> */}
 		</>
 	);
 }

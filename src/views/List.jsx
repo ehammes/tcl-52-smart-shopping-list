@@ -1,4 +1,3 @@
-// import './List.css';
 import { ListItems } from '../components';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -119,7 +118,7 @@ export function List({ data, listToken, tokenHistory }) {
 										placeholder="ITEM NAME"
 									/>
 									<button
-										className="px-2.5 py-2 text-xs font-semibold text-white transition duration-200 ease-in rounded-full shadow-md semibold ring-1 bg-green-primary ring-green-primary focus:ring-2 disabled:text-gray-400 disabled:bg-gray-300 disabled:ring-transparent disabled:shadow-transparent"
+										className="px-2.5 py-2 text-xs font-semibold text-white transition duration-200 ease-in rounded-full shadow-md semibold ring-1 bg-green-primary ring-green-primary focus:ring-2 disabled:text-gray-400 disabled:bg-gray-300 disabled:ring-transparent "
 										onClick={buttonClick}
 										disabled={searchedItem.length === 0}
 									>

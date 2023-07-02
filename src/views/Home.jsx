@@ -1,30 +1,13 @@
-// import './Home.css';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { checkListToken } from '../api/firebase';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-export function Home({
-	handleNewToken,
-	setListToken,
-	listToken,
-	tokenHistory,
-	handleCreateNewList,
-}) {
+export function Home({ setListToken, tokenHistory, handleCreateNewList }) {
 	const [token, setToken] = useState('');
-	const [listNotFound, setlistNotFound] = useState('');
+	const [listNotFound, setListNotFound] = useState('');
 	const [showJoinList, setShowJoinList] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const redirect = useNavigate();
-
-	// Now that home is navigatable, we don't need to redirect to list if there's a token in local storage.
-	// if (listToken) {
-	// 	redirect('/list');
-	// }
-
-	// const handleCreateNewList = useCallback(() => {
-	// 	handleNewToken();
-	// 	redirect('/list');
-	// }, [handleNewToken]);
 
 	const handleJoinExistingList = (e) => {
 		e.preventDefault();
@@ -46,7 +29,7 @@ export function Home({
 			setListToken(caseSensitiveToken);
 			redirect('/list');
 		} else {
-			setlistNotFound('LIST DOES NOT EXIST');
+			setListNotFound('LIST DOES NOT EXIST');
 		}
 	};
 
@@ -87,7 +70,7 @@ export function Home({
 								aria-describedby="token-desc"
 							/>
 							<button
-								className="px-2.5 py-1.5 text-xs font-semibold text-white transition duration-200 ease-in rounded-full shadow-lg bg-green-primary hover:bg-white hover:text-green-primary ring-2 ring-green-primary"
+								className="px-2.5 py-1.5 text-xs font-semibold text-white transition duration-200 ease-in rounded-full shadow-md bg-green-primary hover:bg-white hover:text-green-primary ring-2 ring-green-primary"
 								type="submit"
 							>
 								JOIN

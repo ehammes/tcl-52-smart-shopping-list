@@ -1,4 +1,3 @@
-// import './About.css';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -6,7 +5,7 @@ export function About() {
 	return (
 		<>
 			<div className="max-w-xl py-20 mx-auto overflow-hidden">
-				<div className="grid grid-cols-1 border-2 rounded-md shadow-xl place-items-center border-green-primary">
+				<div className="grid grid-cols-1 border-2 rounded-md shadow-lg place-items-center border-green-primary">
 					<div className="pb-10">
 						<div className="grid grid-cols-1 pt-10 place-items-center">
 							<div className="w-96">

@@ -1,11 +1,5 @@
 import { Outlet } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faHouse } from '@fortawesome/free-solid-svg-icons';
-// import { faListDots } from '@fortawesome/free-solid-svg-icons';
-// import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
-
-// import './Layout.css';
 
 export function Layout({ listToken, handleCreateNewList }) {
 	return (
@@ -17,7 +11,7 @@ export function Layout({ listToken, handleCreateNewList }) {
 						<NavLink to="/">
 							<img
 								className="relative object-contain p-4 h-28"
-								src="img/groceries@512.png"
+								src="img/groceries.svg"
 								alt="logo"
 							/>
 						</NavLink>

@@ -172,12 +172,7 @@ export function AddItem({ listToken, data }) {
 										checked={nextPurchase === soon}
 										onChange={handleChange}
 									/>
-									<label
-										id="soon"
-										name="buyAgain"
-										htmlFor="soon"
-										className="p-2 text-baseline"
-									>
+									<label htmlFor="soon" className="p-2 text-baseline">
 										SOON | WEEKLY
 									</label>
 								</div>
