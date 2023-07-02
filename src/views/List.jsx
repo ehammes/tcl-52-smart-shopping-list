@@ -7,30 +7,33 @@ import Tooltip from '@mui/material/Tooltip';
 import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 
 export function List({ data, listToken, tokenHistory }) {
-	//set state
+	// set state
 	const [searchedItem, setSearchedItem] = useState('');
 	const [showModal, setShowModal] = useState(false);
 
+	// Current Shopping List token user is viewing
 	const currentList = listToken;
 
-	//filtering items searched
+	// filtering items searched
 	const filteredItems = data.filter((item) =>
 		item.name.toLowerCase().includes(searchedItem.toLowerCase()),
 	);
-	//setting where to get searched item value
+	// setting where to get searched item value
 	function handleChange(e) {
 		setSearchedItem(e.target.value);
 	}
-	//telling the button to clear the search field
+	// telling the button to clear the search field
 	function buttonClick(e) {
 		setSearchedItem('');
 	}
 
+	// Close modal function
 	const closeModal = (e) => {
 		e.preventDefault();
 		setShowModal(false);
 	};
 
+	// Copy token to Clipboard function
 	const copyTokenToClipboard = (e) => {
 		e.preventDefault();
 		navigator.clipboard.writeText(listToken);
@@ -39,7 +42,7 @@ export function List({ data, listToken, tokenHistory }) {
 
 	return (
 		<>
-			{/* Clipboard list token modal */}
+			{/* Clipboard list token confirmation modal */}
 			{showModal && (
 				<>
 					<div className="fixed inset-0 flex w-full overflow-auto opacity-50 bg-slate-300"></div>
@@ -65,6 +68,7 @@ export function List({ data, listToken, tokenHistory }) {
 				</>
 			)}
 
+			{/* Current Shopping List token */}
 			<div className="flex flex-row justify-end p-5 space-x-1">
 				<h2 className="text-sm font-semibold">SHOPPING LIST TOKEN:</h2>
 				<h2 className="text-sm">{currentList}</h2>
@@ -78,15 +82,14 @@ export function List({ data, listToken, tokenHistory }) {
 				</Tooltip>
 			</div>
 
-			{/* List Items */}
+			{/* Shopping List Items */}
 			<div className="max-w-xl mx-auto">
 				<h2 className="px-3 mb-3 text-xl font-semibold">
 					SHOPPING LIST ({filteredItems.length})
 				</h2>
 				<div className="max-w-2xl p-10 mx-auto overflow-hidden border-2 rounded-md shadow-lg place-items-center border-green-primary">
-					{/* Welcome message if list is empty */}
-
 					{data.length === 0 ? (
+						// Welcome message if list is empty
 						<div className="flex flex-col py-5">
 							<h2 className="w-full mb-10 font-semibold border-b-2 border-double border-green-primary">
 								ADD YOUR FIRST ITEM BELOW
@@ -98,7 +101,7 @@ export function List({ data, listToken, tokenHistory }) {
 							</div>
 						</div>
 					) : (
-						// Show list items by collection name
+						// Show list items by collection name when items exist
 						// Filter
 						<div className="">
 							<div className="pb-5">
@@ -132,10 +135,10 @@ export function List({ data, listToken, tokenHistory }) {
 									</div>
 								</div>
 							</div>
-							<div className="overflow-y-auto h-96">
-								{/* sort items by urgency */}
 
+							<div className="overflow-y-auto h-96">
 								{!filteredItems.length ? (
+									// items do not exist in Shipping List based on search filter
 									<>
 										<p className="italic">
 											{searchedItem} is not on your Shopping List
@@ -145,7 +148,7 @@ export function List({ data, listToken, tokenHistory }) {
 										</div>
 									</>
 								) : (
-									// List Items
+									// List Items that exist in Shipping List
 									filteredItems.map((list) => {
 										return (
 											<ListItems

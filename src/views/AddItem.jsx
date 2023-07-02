@@ -8,7 +8,7 @@ export function AddItem({ listToken, data }) {
 	//hide or show modal
 	const [showModal, setShowModal] = useState(false);
 
-	//itemName behaviour
+	//itemName behavior
 	const [itemName, setItemName] = useState('');
 
 	const handleChangeItem = (e) => {
@@ -16,7 +16,7 @@ export function AddItem({ listToken, data }) {
 		setItemName(e.target.value);
 	};
 
-	//buyNext radio behaviours
+	//buyNext radio behaviors
 	const soon = '7';
 	const kindOfSoon = '14';
 	const notSoon = '30';
@@ -61,6 +61,7 @@ export function AddItem({ listToken, data }) {
 		return errorCollection;
 	};
 
+	// Submit AddItem Form, check for errors
 	const submitForm = async (e) => {
 		e.preventDefault();
 		setShowModal(true);
@@ -138,7 +139,7 @@ export function AddItem({ listToken, data }) {
 				</>
 			)}
 
-			{/* // Add Item to Shopping List */}
+			{/* // Add Item to Shopping List Form */}
 			<div className="max-w-xl pt-16 mx-auto">
 				<h2 className="px-3 mb-3 text-xl font-semibold">
 					ADD ITEM TO SHOPPING LIST

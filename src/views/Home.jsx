@@ -9,17 +9,20 @@ export function Home({ setListToken, tokenHistory, handleCreateNewList }) {
 	const [showModal, setShowModal] = useState(false);
 	const redirect = useNavigate();
 
+	// Join Existing List function
 	const handleJoinExistingList = (e) => {
 		e.preventDefault();
 		setShowJoinList(true);
 		setShowModal(true);
 	};
 
+	// Capture form values
 	const handleFormChange = (e) => {
 		const value = e.target.value;
 		setToken(value);
 	};
 
+	// Check if Shopping List exists using three word token, redirect to Shopping List if found
 	const handleTokenSubmit = async (e) => {
 		e.preventDefault();
 		const caseSensitiveToken = token.toLowerCase();
@@ -33,6 +36,7 @@ export function Home({ setListToken, tokenHistory, handleCreateNewList }) {
 		}
 	};
 
+	// Close function for Join Existing List modal
 	const closeModal = (e) => {
 		e.preventDefault();
 		setShowModal(false);
@@ -88,6 +92,7 @@ export function Home({ setListToken, tokenHistory, handleCreateNewList }) {
 				</>
 			)}
 
+			{/* Home page shopping list app CTAs and list of shopping lists/tokens */}
 			<div className="max-w-xl py-20 mx-auto overflow-hidden">
 				<div className="grid grid-cols-1 p-10 border-2 rounded-md shadow-lg place-items-center border-green-primary">
 					<div className="w-96">

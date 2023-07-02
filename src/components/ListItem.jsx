@@ -14,11 +14,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
 
 export function ListItems({ name, data, listToken }) {
+	// checkbox selection calculation for Shopping List item
 	const initialChecked =
 		Date.now() - data.dateLastPurchased?.toMillis() < 86400000 || false;
 
 	const [isChecked, setIsChecked] = useState(initialChecked);
 
+	// Checkbox selection function for Shopping List item
 	const handleSelect = (e) => {
 		let nextChecked = e.target.checked;
 
@@ -30,6 +32,7 @@ export function ListItems({ name, data, listToken }) {
 		}
 	};
 
+	// Delete Shopping List item from list function
 	const handleDeleteItem = () => {
 		deleteItem(listToken, data.id);
 	};
@@ -44,6 +47,7 @@ export function ListItems({ name, data, listToken }) {
 
 	return (
 		<>
+			{/* Shopping List Items for current token list */}
 			<div className="border-2">
 				<Accordion>
 					<AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -73,6 +77,8 @@ export function ListItems({ name, data, listToken }) {
 							</div>
 						</div>
 					</AccordionSummary>
+
+					{/* Additional details for shopping list item */}
 					<AccordionDetails className="border border-gray-100">
 						<ul>
 							<li className="mx-1 text-sm font-semibold text-black">
@@ -96,14 +102,14 @@ export function ListItems({ name, data, listToken }) {
 								</span>
 							</li>
 						</ul>
-
-						{/* </div> */}
 					</AccordionDetails>
 				</Accordion>
 			</div>
 		</>
 	);
 }
+
+// Calculations for Shopping List Items based on buying behavior
 
 function createNextData(data) {
 	const today = new Date();
