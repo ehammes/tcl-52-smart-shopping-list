@@ -33,7 +33,7 @@ export function getDaysBetweenDates(
 	olderPurchaseInMilliseconds,
 ) {
 	const timeBetween = newerPurchaseInMilliseconds - olderPurchaseInMilliseconds;
-	const daysBetween = Math.floor(timeBetween / ONE_DAY_IN_MILLISECONDS);
+	const daysBetween = Math.ceil(timeBetween / ONE_DAY_IN_MILLISECONDS);
 
 	return daysBetween;
 }
