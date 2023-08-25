@@ -1,16 +1,15 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
-import { AddItem, Home, Layout, List } from './views';
+import { AddItem, List, Layout } from './views';
 import { About } from './views/About';
+import Home from './views/Home';
 
 import { getItemData, streamListItems } from './api';
 import { useStateWithStorage } from './utils';
 import { generateToken } from '@the-collab-lab/shopping-list-utils';
 
-import { useNavigate } from 'react-router-dom';
-
-export function App() {
+const App = () => {
 	const [data, setData] = useState([]);
 	const [listToken, setListToken] = useStateWithStorage(
 		null,
@@ -41,7 +40,7 @@ export function App() {
 		if (!listToken) return;
 
 		/**
-		 * streamListItems` takes a `listToken` so it can commuinicate
+		 * streamListItems` takes a `listToken` so it can communicate
 		 * with our database, then calls a callback function with
 		 * a `snapshot` from the database.
 		 *
@@ -107,4 +106,6 @@ export function App() {
 			</Route>
 		</Routes>
 	);
-}
+};
+
+export default App;
