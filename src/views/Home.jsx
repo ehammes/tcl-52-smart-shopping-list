@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { checkListToken } from '../api/firebase';
 import { useNavigate } from 'react-router-dom';
+import TokenList from '../components/TokenList';
 
-export function Home({ setListToken, tokenHistory, handleCreateNewList }) {
+const Home = ({ setListToken, tokenHistory, handleCreateNewList }) => {
 	const [token, setToken] = useState('');
 	const [listNotFound, setListNotFound] = useState('');
 	const [showJoinList, setShowJoinList] = useState(false);
@@ -118,44 +119,11 @@ export function Home({ setListToken, tokenHistory, handleCreateNewList }) {
 						</button>
 					</div>
 
-					{/* Token List */}
-					{tokenHistory.length !== 0 && (
-						<div className="w-full">
-							<p className="pb-1 mt-5 mb-2 font-semibold border-b-4 border-green-primary">
-								SHOPPING LISTS:
-							</p>
-							<ul className="">
-								{tokenHistory.map((token) => {
-									return (
-										<li
-											key={token.token}
-											className="flex flex-row items-center pl-2"
-										>
-											{' '}
-											<img
-												src="/img/token_checkmark.png"
-												alt="checkmark"
-												className="w-auto h-4 mr-2"
-											/>
-											<button
-												className="font-light border-b-2 hover:text-green-primary hover:font-semibold"
-												onClick={() => {
-													setListToken(token.token);
-													redirect('/list');
-												}}
-											>
-												{token.alias
-													? token.alias + ' (' + token.token + ')'
-													: token.token}
-											</button>
-										</li>
-									);
-								})}
-							</ul>
-						</div>
-					)}
+					<TokenList tokenHistory={tokenHistory} setListToken={setListToken} />
 				</div>
 			</div>
 		</>
 	);
-}
+};
+
+export default Home;
