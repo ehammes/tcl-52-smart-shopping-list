@@ -56,7 +56,7 @@ const Home = ({ setListToken, tokenHistory, handleCreateNewList }) => {
 								type="button"
 								onClick={closeModal}
 							>
-								<img className="h-3 " src="/img/x.png" alt="" />
+								<img className="h-3 " src="img/x.png" alt="" />
 							</button>
 						</div>
 						<form onSubmit={handleTokenSubmit} className="px-5 mx-auto">
